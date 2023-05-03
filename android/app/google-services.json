@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "864387178403",
+    "project_id": "chatgtp-2ff3c",
+    "storage_bucket": "chatgtp-2ff3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864387178403:android:6bd7f8a9bb16f37f9a8416",
+        "android_client_info": {
+          "package_name": "com.mycompany.chatgtp3_5_turbo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864387178403-p47p9fenhoikd21c9lvh5pd3kk0dqgk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.chatgtp3_5_turbo",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "864387178403-pmshg9pi79b9hg807g3feejk93jfok6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrAc7HrzXqKQ_23FqjMlBdkYYYGQePcSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864387178403-pmshg9pi79b9hg807g3feejk93jfok6a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "864387178403-4hihos4ajitggbutbbqohj0ht54mclkd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.chatgtpturbo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864387178403:android:df611df891fd86889a8416",
+        "android_client_info": {
+          "package_name": "com.mycompany.chatgtpturbo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864387178403-dr52biptnbj2p9r15v4lh8ir15m2ooek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.chatgtpturbo",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "864387178403-pmshg9pi79b9hg807g3feejk93jfok6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrAc7HrzXqKQ_23FqjMlBdkYYYGQePcSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864387178403-pmshg9pi79b9hg807g3feejk93jfok6a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "864387178403-4hihos4ajitggbutbbqohj0ht54mclkd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.chatgtpturbo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

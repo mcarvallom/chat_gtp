@@ -1,11 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_ad_banner.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/iniciosesion/iniciosesion_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -32,6 +34,8 @@ class _ChatWidgetState extends State<ChatWidget> {
     _model = createModel(context, () => ChatModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Chat'});
+    _model.textController1 ??= TextEditingController(
+        text: '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');
     _model.campoMensajeController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -116,6 +120,98 @@ class _ChatWidgetState extends State<ChatWidget> {
                       iOSAdUnitID: 'ca-app-pub-6855153876425359/4696202914',
                       androidAdUnitID: 'ca-app-pub-6855153876425359/7251828460',
                     ),
+                    if (currentUserEmail == 'marccarvallom@gmail.com')
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 10.0),
+                            child: TextFormField(
+                              controller: _model.textController1,
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                hintText: 'clave API',
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodySmall,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                filled: true,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              minLines: 1,
+                              validator: _model.textController1Validator
+                                  .asValidator(context),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 10.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'CHAT_PAGE_PUBLICAR_BTN_ON_TAP');
+                                logFirebaseEvent('Button_backend_call');
+
+                                final claveapiCreateData = {
+                                  'claveapi': [_model.textController1.text],
+                                };
+                                await ClaveapiRecord.collection
+                                    .doc()
+                                    .set(claveapiCreateData);
+                              },
+                              text: 'publicar',
+                              options: FFButtonOptions(
+                                width: 130.0,
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Urbanist',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     Expanded(
                       child: InkWell(
                         splashColor: Colors.transparent,
@@ -400,86 +496,129 @@ class _ChatWidgetState extends State<ChatWidget> {
                                   topRight: Radius.circular(0.0),
                                 ),
                               ),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'CHAT_PAGE_ENVIAR_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_update_app_state');
-                                  FFAppState().update(() {
-                                    FFAppState().pregunta =
-                                        _model.campoMensajeController.text;
-                                  });
-                                  logFirebaseEvent('Button_backend_call');
-                                  _model.apiResult8do =
-                                      await GenerarChatCall.call(
-                                    openaiApiKey:
-                                        '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',
-                                    message: _model.campoMensajeController.text,
-                                  );
-                                  if ((_model.apiResult8do?.succeeded ??
-                                      true)) {
-                                    logFirebaseEvent('Button_update_app_state');
-                                    setState(() {
-                                      FFAppState().verrespuesta = true;
-                                    });
-                                    logFirebaseEvent(
-                                        'Button_update_widget_state');
-                                    setState(() {
-                                      _model.respuestadeMensaje =
-                                          GenerarChatCall.mensaje(
-                                        (_model.apiResult8do?.jsonBody ?? ''),
-                                      ).toString();
-                                    });
-                                    logFirebaseEvent(
-                                        'Button_clear_text_fields');
-                                    setState(() {
-                                      _model.campoMensajeController?.clear();
-                                    });
-                                  } else {
-                                    logFirebaseEvent('Button_show_snack_bar');
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Hubo un error',
-                                          style: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
+                              child: StreamBuilder<List<ClaveapiRecord>>(
+                                stream: queryClaveapiRecord(
+                                  singleRecord: true,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: SpinKitPulse(
+                                          color: FlutterFlowTheme.of(context)
+                                              .grayIcon,
+                                          size: 50.0,
                                         ),
-                                        duration: Duration(milliseconds: 2000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryDark,
                                       ),
                                     );
                                   }
+                                  List<ClaveapiRecord>
+                                      buttonClaveapiRecordList = snapshot.data!;
+                                  // Return an empty Container when the item does not exist.
+                                  if (snapshot.data!.isEmpty) {
+                                    return Container();
+                                  }
+                                  final buttonClaveapiRecord =
+                                      buttonClaveapiRecordList.isNotEmpty
+                                          ? buttonClaveapiRecordList.first
+                                          : null;
+                                  return FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'CHAT_PAGE_ENVIAR_BTN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'Button_update_app_state');
+                                      FFAppState().update(() {
+                                        FFAppState().pregunta =
+                                            _model.campoMensajeController.text;
+                                      });
+                                      logFirebaseEvent('Button_backend_call');
+                                      _model.apiResult8do =
+                                          await GenerarChatCall.call(
+                                        openaiApiKey: buttonClaveapiRecord!
+                                            .claveapi!
+                                            .toList()
+                                            .first,
+                                        message:
+                                            _model.campoMensajeController.text,
+                                      );
+                                      if ((_model.apiResult8do?.succeeded ??
+                                          true)) {
+                                        logFirebaseEvent(
+                                            'Button_update_app_state');
+                                        setState(() {
+                                          FFAppState().verrespuesta = true;
+                                        });
+                                        logFirebaseEvent(
+                                            'Button_update_widget_state');
+                                        setState(() {
+                                          _model.respuestadeMensaje =
+                                              GenerarChatCall.mensaje(
+                                            (_model.apiResult8do?.jsonBody ??
+                                                ''),
+                                          ).toString();
+                                        });
+                                        logFirebaseEvent(
+                                            'Button_clear_text_fields');
+                                        setState(() {
+                                          _model.campoMensajeController
+                                              ?.clear();
+                                        });
+                                      } else {
+                                        logFirebaseEvent(
+                                            'Button_show_snack_bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Hubo un error',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryDark,
+                                          ),
+                                        );
+                                      }
 
-                                  setState(() {});
-                                },
-                                text: 'Enviar',
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .headlineSmall
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w500,
+                                      setState(() {});
+                                    },
+                                    text: 'Enviar',
+                                    options: FFButtonOptions(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Colors.black,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
                                       ),
-                                  elevation: 0.0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
